@@ -22,6 +22,7 @@ abstract class NoteDatabase : RoomDatabase(){
                     "note_database"
                 ).build()
                 INSTANCE = instance
+
                 instance
             }
         }

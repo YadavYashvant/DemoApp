@@ -8,7 +8,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface NoteDao {
+interface NoteDao{
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(note: Note)
 

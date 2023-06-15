@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "notes_table")
 class Note(@ColumnInfo(name = "text")val text:String){
-           @PrimaryKey(autoGenerate = true)val idty = 0
+           @PrimaryKey(autoGenerate = true) var idty = 0
 
 }
