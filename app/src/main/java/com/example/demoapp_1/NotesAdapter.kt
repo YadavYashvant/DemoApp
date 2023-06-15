@@ -12,14 +12,14 @@ class NotesAdapter(private val context: Context, private val listener: InoteAdap
 
     private val allNotes = ArrayList<Note>()
     inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textView = itemView.findViewById<TextView>(R.id.task)
-        val deleteButton = itemView.findViewById<ImageView>(R.id.delete_button)
+        val textView:TextView = itemView.findViewById<TextView>(R.id.task)
+        var deleteButton:ImageView = itemView.findViewById<ImageView>(R.id.delete_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val viewHolder = NoteViewHolder(LayoutInflater.from(context).inflate(R.layout.item_view,parent,false))
         viewHolder.deleteButton.setOnClickListener {
-            listener.onItemClicked(allNotes[viewHolder.adapterPosition])
+            listener.onItemClicked((allNotes[viewHolder.adapterPosition]))
         }
         return viewHolder
     }

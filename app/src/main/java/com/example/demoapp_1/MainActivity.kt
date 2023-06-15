@@ -17,19 +17,12 @@ class MainActivity : AppCompatActivity(),InoteAdapter{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val adapter  = NotesAdapter(this,this)
+        recyclerView.adapter = adapter
 
-        val recylclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recylclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = NotesAdapter(this,this)
-        recylclerView.adapter = adapter
-
-        //viewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-        //viewModel = ViewModelProvider(this,
-            //ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
-        viewModel =
-            ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(
-                NoteViewModel::class.java
-            )
+        viewModel = ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
         viewModel.allNotes.observe(this, Observer {list->
             list?.let {
                 adapter.updateList(it)
@@ -38,17 +31,24 @@ class MainActivity : AppCompatActivity(),InoteAdapter{
     }
 
     override fun onItemClicked(note: Note) {
+
         viewModel.deleteNote(note)
-        Toast.makeText(this,"${note.text} deleted",Toast.LENGTH_LONG).show()
+        Toast.makeText(this , "${note.text}Deleted",Toast.LENGTH_LONG).show()
+
+
     }
 
-    fun submitNote(view: View) {
-        val input = findViewById<EditText>(R.id.EditNote)
+    fun submitData(view: View) {
+        var input = findViewById<EditText>(R.id.EditNote)
         val noteText = input.text.toString()
-        if(noteText.isNotEmpty()) {
+        if (noteText.isNotEmpty()){
             viewModel.insertNote(Note(noteText))
-            Toast.makeText(this,"$noteText inserted",Toast.LENGTH_LONG).show()
+            Toast.makeText(this , "$noteText Inserted",Toast.LENGTH_LONG).show()
+
+
         }
+
+
     }
 
 }

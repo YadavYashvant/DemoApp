@@ -12,6 +12,7 @@ abstract class NoteDatabase : RoomDatabase(){
 
     companion object{
 
+        @Volatile
         private var INSTANCE: NoteDatabase? = null
 
         fun getDatabase(context: Context): NoteDatabase {
